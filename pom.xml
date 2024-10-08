@@ -76,42 +76,6 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>com.diffplug.spotless</groupId>
-                <artifactId>spotless-maven-plugin</artifactId>
-                <version>${spotless.version}</version>
-                <configuration>
-                    <formats>
-                        <!-- prettier with java-plugin -->
-                        <format>
-                            <includes>
-                                <include>src/*/java/**/*.java</include>
-                            </includes>
-
-                            <prettier>
-                                <devDependencies>
-                                    <prettier>2.8.8</prettier>
-                                    <prettier-plugin-java>2.2.0</prettier-plugin-java>
-                                </devDependencies>
-                                <config>
-                                    <tabWidth>4</tabWidth>
-                                    <parser>java</parser>
-                                    <plugins>prettier-plugin-java
-                                    </plugins><!-- this is only for prettier 3.0.0 and above: an additional 'plugins' config element is required -->
-                                </config>
-                            </prettier>
-                        </format>
-                    </formats>
-
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.5.0</version>
             </plugin>
