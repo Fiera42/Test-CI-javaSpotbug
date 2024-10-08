@@ -23,7 +23,6 @@ jobs:
     steps:
       - name: ⬇️ Checkout code
         uses: actions/checkout@v4
-      - run: java
       - name: 🔧 Build and Verify with Maven
         run: mvn -B verify
       - name: 🔍️ Running SpotBugs
