@@ -13,6 +13,8 @@ jobs:
         with:
           distribution: oracle
           java-version: 22
+      - name: Set JAVA_HOME for Maven
+        run: echo "JAVA_HOME=${{ steps.setup-java.outputs.java-home }}" >> $GITHUB_ENV
     outputs:
       java-cache: ${{ steps.setup-java.outputs.cache-hit }}
       
@@ -23,10 +25,6 @@ jobs:
     steps:
       - name: ⬇️ Checkout code
         uses: actions/checkout@v4
-      - name: Check Java version
-        run: java -version
-      - name: Check Maven Java version
-        run: mvn -v
       - name: 🔧 Build and Verify with Maven
         run: mvn -B -X verify
       - name: 🔍️ Running SpotBugs
