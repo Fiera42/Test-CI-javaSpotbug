@@ -16,7 +16,7 @@ jobs:
       - name: ⬇️ Checkout code
         uses: actions/checkout@v4
       - name: 🔧 Build and Verify with Maven
-        run: mvn -B -X verify
+        run: mvn -B verify
       - name: 🔍️ Running SpotBugs
         run: mvn spotbugs:spotbugs
       - name: 📄 SpotBugs Report
