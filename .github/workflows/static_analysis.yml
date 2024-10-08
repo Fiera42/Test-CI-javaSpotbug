@@ -1,0 +1,31 @@
+name: static analysis CI
+run-name: ${{ github.repository }} CI [${{ github.event_name }}]
+on: [pull_request]
+jobs:
+  setup:
+    name: Setup Environment
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout ${{ github.ref }} on ${{ runner.os }} machine
+        uses: actions/checkout@v4
+      - name: ⬇️ Installing Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: oracle
+          java-version: 22
+    outputs:
+      java-cache: ${{ steps.setup-java.outputs.cache-hit }}
+      
+  java_spotbug:
+    name: SpotBugs
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: ⬇️ Checkout code
+        uses: actions/checkout@v4
+      - name: Build with Maven
+        run: mvn -B verify spotbugs:spotbugs
+      - name: 🔍️ Running SpotBugs
+        uses: jwgmeligmeyling/spotbugs-github-action@master
+        with:
+          path: '**/spotbugsXml.xml'
