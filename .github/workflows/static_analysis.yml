@@ -2,8 +2,8 @@ name: static analysis CI
 run-name: ${{ github.repository }} CI [${{ github.event_name }}]
 on: [pull_request]
 jobs:
-  setup:
-    name: Setup Environment
+  java_spotbug:
+    name: SpotBugs
     runs-on: ubuntu-latest
     steps:
       - name: ⬇️ Checkout ${{ github.ref }} on ${{ runner.os }} machine
@@ -13,16 +13,6 @@ jobs:
         with:
           distribution: oracle
           java-version: 22
-      - name: Set JAVA_HOME for Maven
-        run: echo "JAVA_HOME=${{ steps.setup-java.outputs.java-home }}" >> $GITHUB_ENV
-    outputs:
-      java-cache: ${{ steps.setup-java.outputs.cache-hit }}
-      
-  java_spotbug:
-    name: SpotBugs
-    runs-on: ubuntu-latest
-    needs: setup
-    steps:
       - name: ⬇️ Checkout code
         uses: actions/checkout@v4
       - name: 🔧 Build and Verify with Maven
